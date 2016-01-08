@@ -1,0 +1,63 @@
+---
+- name: install apache
+  zypper: name=apache2 state=present
+
+- name: install apaches fcgi-module
+  zypper: name=apache2-mod_fcgid state=present
+
+- name: enable apaches fcgi-module
+  apache2_module: name=fcgid state=present
+
+- name: enable apaches rewrite-module
+  apache2_module: name=rewrite state=present
+
+- name: install munin-server
+  zypper: name=munin state=present
+
+# This script pulls the hosts-repo and therefore need a private key!!!
+#
+- name: setup cronjob to generate inventory
+  copy: src=munin_inventory.sh dest=/etc/cron.hourly mode=755
+
+- name: copy script to generate inventory manually
+  copy: src=munin_inventory_manual.py dest=/etc/munin/munin_inventory_manual.py mode=755
+
+- name: install rrdtool for rrdcached
+  zypper: name=rrdtool-cached state=installed
+
+- name: write rddcached into host.allow
+  lineinfile: 'dest=/etc/hosts.allow line="rrdcached: ALL" create=yes owner=0 group=0 mode=0644'
+
+- name: add apaches user to muningroup
+  user: name=wwwrun groups=munin
+
+- name: make logdir writable for groupusers
+  file: path=/var/log/munin mode=g+rw
+
+- name: mkdir for munin tmpfs
+  file: path=/munintmp state=directory
+
+# tmpfs is not trivial with docker
+#
+#- name: mount tmpfs for munin
+#  mount: name=/munintmp fstype=tmpfs src=tmpfs state=mounted
+
+- name: copy munin.conf
+  copy: src=munin.conf dest=/etc/munin/munin.conf
+
+- name: copy munin cron entry
+  copy: src=munin.cron dest=/etc/cron.d/munin
+
+- name: copy vhost config
+  copy: src=munin_vhost.conf dest=/etc/apache2/vhosts.d/munin.conf
+
+- name: rrdcached dir structure
+  shell: /usr/bin/install -d -o munin -g munin -m 0755 /munintmp/rrdcached-journal /run/munin && /usr/bin/install -d -o wwwrun -g www -m 0755 /munintmp/cgi-tmp
+
+- name: fix user rights
+  file: path=/var/run/munin state=directory recurse=yes owner=munin group=munin
+
+- name: delete htaccess
+  file: path=/srv/www/htdocs/munin/.htaccess state=absent
+
+

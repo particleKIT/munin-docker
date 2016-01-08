@@ -1,0 +1,4 @@
+---
+
+pluginsource: /usr/lib/munin/plugins
+plugindest: /etc/munin/plugins

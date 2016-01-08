@@ -1,0 +1,8 @@
+---
+
+- name: munin installs
+  hosts: localhost
+  roles:
+    - munin-client
+    - munin-server
+

@@ -1,0 +1,16 @@
+---
+
+pluginsource: /usr/lib/munin/plugins
+plugindest: /etc/munin/plugins
+
+avgrdwait_warning: '0:3'
+avgrdwait_critical: '0:5'
+
+avgwrwait_warning: '0:3'
+avgwrwait_critical: '0:5'
+
+avgrdwait_warning_high: '0:5'
+avgrdwait_critical_high: '0:10'
+
+avgwrwait_warning_high: '0:5'
+avgwrwait_critical_high: '0:10'

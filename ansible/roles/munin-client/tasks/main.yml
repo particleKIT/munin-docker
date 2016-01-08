@@ -1,0 +1,27 @@
+---
+
+- name: install munin-client
+  zypper: name=munin-node state=installed
+
+- name: create needed dirs
+  file: path=/var/run/munin owner=munin state=directory
+
+- name: copy conf for munin-node
+  copy: src=munin-node.conf dest=/etc/munin/munin-node.conf
+
+- name: copy plugin-conf
+  copy: src=plugin.conf dest=/etc/munin/plugin-conf.d/munin-node
+
+- name: create symlinks for specific master-plugins (munin-stats)
+  file: src={{ item.src }} dest={{ item.dest }} state=link
+  with_items:
+    - { src: "{{ pluginsource }}/munin_stats", dest: "{{ plugindest }}/munin_stats" }
+    - { src: "{{ pluginsource }}/munin_update", dest: "{{ plugindest }}/munin_update" }
+
+
+- name: disable plugins which do not make sense in containers
+  file: path="/etc/munin/plugins/{{ item }}" state=absent
+  with_items:
+      - "swap"
+      - "diskstats"
+      - "df"
