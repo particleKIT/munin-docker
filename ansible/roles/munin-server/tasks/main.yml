@@ -57,6 +57,9 @@
 - name: fix user rights
   file: path=/var/run/munin state=directory recurse=yes owner=munin group=munin
 
+- name: fix user rights on wwwdir
+  file: path=/srv/www/htdocs/munin state=directory recurse=yes owner=munin group=munin
+
 - name: delete htaccess
   file: path=/srv/www/htdocs/munin/.htaccess state=absent
 
