@@ -23,6 +23,7 @@ EXPOSE 4949
 
 VOLUME /etc/munin/
 VOLUME /etc/apache2/vhosts.d/
+VOLUME /var/lib/munin/
 
 ENTRYPOINT ["./init.sh"]
 CMD ["/usr/sbin/apachectl", "start",  "-DFOREGROUND"]
