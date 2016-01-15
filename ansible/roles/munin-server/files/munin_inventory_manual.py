@@ -39,6 +39,9 @@ for hostlist in raw_lists:
         elif len(hostargs) == 4 :
             for i in range(int(hostargs[0]), int(hostargs[1])):
                 inventory = inventory + ("[{0}" + str(i) + "{1}]\naddress {0}" + str(i) + "{1}\n").format(hostargs[2], hostargs[3])
+        elif len(hostargs) == 5 :
+            for i in range(int(hostargs[0]), int(hostargs[1])):
+                inventory = inventory + ("[{0}" + "{2:0{width}}" + "{1}]\naddress {0}" + "{2:0{width}}" + "{1}\n").format(hostargs[3], hostargs[4], i, width=int(hostargs[2]))
     except IndexError:
         print("something went wrong")
 
