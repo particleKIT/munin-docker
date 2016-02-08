@@ -9,16 +9,18 @@
 if [ "$INVENTORY_GEN" = "repo" ]
 then
 
-    # configure inventoy generation script
+    # configure inventoy generation cronjob
     sed -i "s/sourceurl=/sourceurl=$HOSTS_REPO/g" /etc/cron.hourly/munin_inventory.sh
     /etc/cron.hourly/munin_inventory.sh
 
 elif [ "$INVENTORY_GEN" = "list" ]
 then
+    # remove inventoy generation cronjob
+    rm -f /etc/cron.hourly/munin_inventory.sh
+
     # generate inventrory by a given list
     touch /etc/munin/munin-conf.d/inventory
     /etc/munin/munin_inventory_manual.py "$HOSTS_LIST" >> /etc/munin/munin-conf.d/inventory
-
 fi
 
 
