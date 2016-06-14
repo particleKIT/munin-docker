@@ -4,7 +4,7 @@ ADD ansible /ansible/
 
 WORKDIR /ansible/
 
-RUN zypper --non-interactive in --auto-agree-with-licenses python3 python3-PyYAML
+RUN zypper --non-interactive in --auto-agree-with-licenses python3 python3-PyYAML python-requests python3-requests
 
 RUN source /root/.ansible/hacking/env-setup && ansible-playbook local.yml -c local
 ADD init.sh /ansible/ 
