@@ -13,6 +13,5 @@ else
     cd $targetdir
 fi
 
-./buildfiles --munin
-cp build/muninhosts /etc/munin/munin-conf.d/
+./buildfiles --munin --stdout >> /etc/munin/munin-conf.d/muninhosts
 echo -e "[localhost]\naddress localhost\nuse_node_name yes" >> /etc/munin/munin-conf.d/muninhosts 
