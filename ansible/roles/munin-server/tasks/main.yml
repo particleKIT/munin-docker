@@ -14,6 +14,15 @@
 - name: install munin-server
   zypper: name=munin state=present
 
+# for email notifications
+- name: install mail tools
+  zypper:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - mailx
+    - msmtp-mta
+
 # This script pulls the hosts-repo and therefore need a private key!!!
 #
 - name: setup cronjob to generate inventory

@@ -29,6 +29,9 @@ sed -i "s/all granted/$APACHE_REQUIRE/g" /etc/apache2/vhosts.d/munin.conf
 sed -i 's/ServerAdmin.*$/ServerAdmin '"$APACHE_MAIL"'/g' /etc/apache2/vhosts.d/munin.conf
 sed -i 's/ServerName.*$/ServerName '"$APACHE_DOMAIN"'/g' /etc/apache2/vhosts.d/munin.conf
 
+echo -e "account default\nfrom $NOTIFICATION_FROM\nhost $NOTIFICATION_RELAY" > /var/lib/munin/.msmtprc
+echo -e "contact.$NOTIFICATION_NAME.command mail -s 'Munin notification' $NOTIFICATION_TO" > /etc/munin/munin-config.d/notification
+
 #run munin-cron for the first time
 su - munin --shell=/bin/bash -c "munin-cron --host localhost --debug"
 
