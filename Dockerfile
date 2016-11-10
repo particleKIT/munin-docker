@@ -1,12 +1,13 @@
-FROM particlekit/docker-ansible-opensuse:leap
+FROM opensuse:42.1
 
 ADD ansible /ansible/ 
 
 WORKDIR /ansible/
 
-RUN zypper --non-interactive in --auto-agree-with-licenses python3 python3-PyYAML python-requests python3-requests
+RUN zypper --non-interactive in --auto-agree-with-licenses python3 python3-PyYAML python-requests python3-requests ansible git
 
-RUN source /root/.ansible/hacking/env-setup && ansible-playbook local.yml -c local
+RUN ansible-playbook local.yml -c local
+
 ADD init.sh /ansible/ 
 RUN chmod +x init.sh
 
