@@ -14,6 +14,7 @@ RUN chmod +x init.sh
 ENV INVENTORY_GEN="repo" \ 
     HOSTS_REPO="https:\/\/your\/repo.git" \
     HOSTS_LIST="1 10 node domain" \
+    HOSTS_URL="https:\/\/example.com\/munin_inventory" \
     APACHE_REQUIRE="all granted" \
     APACHE_DOMAIN="munin" \
     APACHE_MAIL="admin@munin"

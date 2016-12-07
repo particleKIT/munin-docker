@@ -1,8 +1,5 @@
 #!/bin/bash
 
-
-
-
 #start munin-node
 /usr/sbin/munin-node
 
@@ -12,6 +9,13 @@ then
     # configure inventoy generation cronjob
     sed -i "s/sourceurl=/sourceurl=$HOSTS_REPO/g" /etc/cron.hourly/munin_inventory.sh
     /etc/cron.hourly/munin_inventory.sh
+
+elif [ "$INVENTORY_GEN" = "url" ]
+    rm -f /etc/cron.hourly/munin_inventory.sh
+
+    cat > /etc/cron.hourly/munin_inventory_url.sh <<EOF
+wget -qO /etc/munin/munin-conf.d/inventory $HOSTS_URL
+EOF
 
 elif [ "$INVENTORY_GEN" = "list" ]
 then
