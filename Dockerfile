@@ -4,7 +4,7 @@ ADD ansible /ansible/
 
 WORKDIR /ansible/
 
-RUN zypper --non-interactive in --auto-agree-with-licenses python3 python3-PyYAML python-requests python3-requests ansible git
+RUN zypper --non-interactive in --auto-agree-with-licenses python3 python3-PyYAML python-requests python3-requests ansible git wget
 
 RUN ansible-playbook local.yml -c local
 
