@@ -11,6 +11,7 @@ then
     /etc/cron.hourly/munin_inventory.sh
 
 elif [ "$INVENTORY_GEN" = "url" ]
+then
     rm -f /etc/cron.hourly/munin_inventory.sh
 
     cat > /etc/cron.hourly/munin_inventory_url.sh <<EOF
