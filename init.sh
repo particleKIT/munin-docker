@@ -17,6 +17,8 @@ then
     cat > /etc/cron.hourly/munin_inventory_url.sh <<EOF
 wget -qO /etc/munin/munin-conf.d/inventory $HOSTS_URL
 EOF
+    chmod +x /etc/cron.hourly/munin_inventory_url.sh
+    /etc/cron.hourly/munin_inventory_url.sh
 
 elif [ "$INVENTORY_GEN" = "list" ]
 then
