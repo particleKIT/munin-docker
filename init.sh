@@ -16,6 +16,7 @@ then
 
     cat > /etc/cron.hourly/munin_inventory_url.sh <<EOF
 wget -qO /etc/munin/munin-conf.d/inventory $HOSTS_URL
+echo -e "[localhost]\naddress localhost\nuse_node_name yes" >> /etc/munin/munin-conf.d/inventory
 EOF
     chmod +x /etc/cron.hourly/munin_inventory_url.sh
     /etc/cron.hourly/munin_inventory_url.sh
