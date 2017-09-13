@@ -1,4 +1,4 @@
-FROM opensuse:42.1
+FROM opensuse:42.3
 
 ADD ansible /ansible/ 
 
