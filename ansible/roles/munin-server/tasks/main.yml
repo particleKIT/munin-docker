@@ -14,6 +14,9 @@
 - name: install munin-server
   zypper: name=munin state=present
 
+- name: install cron
+  zypper: name=cron state=present
+
 # for email notifications
 - name: install mail tools
   zypper:
