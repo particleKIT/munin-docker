@@ -64,7 +64,7 @@
   copy: src=munin_vhost.conf dest=/etc/apache2/vhosts.d/munin.conf
 
 - name: rrdcached dir structure
-  shell: /usr/bin/install -d -o munin -g munin -m 0755 /munintmp/rrdcached-journal /run/munin && /usr/bin/install -d -o wwwrun -g www -m 0755 /munintmp/cgi-tmp
+  shell: /usr/bin/install -d -o munin -g munin -m 0755 /munintmp/rrdcached-journal /run/munin && /usr/bin/install -d -o wwwrun -g wwwrun -m 0755 /munintmp/cgi-tmp
 
 - name: fix user rights
   file: path=/var/run/munin state=directory recurse=yes owner=munin group=munin

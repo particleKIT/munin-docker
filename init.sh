@@ -52,10 +52,10 @@ su - munin --shell=/bin/bash -c "munin-cron --host localhost --debug"
 /usr/bin/setfacl -m u:munin:rw /run/munin/rrdcached.sock
 
 #start cgi-html
-/usr/bin/spawn-fcgi -s /var/run/munin/munin-cgi-html.sock -P /var/run/munin/munin-cgi-html.pid -u wwwrun -g munin -M 0770 -U wwwrun -G www /srv/www/cgi-bin/munin-cgi-html 
+/usr/bin/spawn-fcgi -s /var/run/munin/munin-cgi-html.sock -P /var/run/munin/munin-cgi-html.pid -u wwwrun -g munin -M 0770 -U wwwrun -G wwwrun /srv/www/cgi-bin/munin-cgi-html 
    
 #start cgi-graph 
-/usr/bin/spawn-fcgi -s /var/run/munin/munin-cgi-graph.sock -P /var/run/munin/munin-cgi-graph.pid -u wwwrun -g munin -M 0770 -U wwwrun -G www /srv/www/cgi-bin/munin-cgi-graph 
+/usr/bin/spawn-fcgi -s /var/run/munin/munin-cgi-graph.sock -P /var/run/munin/munin-cgi-graph.pid -u wwwrun -g munin -M 0770 -U wwwrun -G wwwrun /srv/www/cgi-bin/munin-cgi-graph 
 
 #fix permissions
 chown -R munin:munin /var/run/munin
