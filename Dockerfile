@@ -4,7 +4,7 @@ ADD ansible /ansible/
 
 WORKDIR /ansible/
 
-RUN zypper --non-interactive in --auto-agree-with-licenses python3 python3-PyYAML python-requests python3-requests ansible git which wget acl perl-rrdtool
+RUN zypper --non-interactive in --auto-agree-with-licenses python3 python3-PyYAML python-requests python3-requests ansible git which wget acl perl-rrdtool make gcc munin && cpan install CGI::Fast && zypper rm -y make gcc
 
 RUN ansible-playbook local.yml -c local
 
