@@ -18,8 +18,8 @@ ENV INVENTORY_GEN="repo" \
     HOSTS_URL="https:\/\/example.com\/munin_inventory" \
     APACHE_REQUIRE="all granted" \
     APACHE_DOMAIN="munin" \
-    APACHE_MAIL="admin@munin"
-
+    APACHE_MAIL="admin@munin"\
+    TIMEZONE="/Europe/Berlin"
 
 EXPOSE 80
 EXPOSE 4949

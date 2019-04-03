@@ -3,6 +3,9 @@
 #start munin-node
 /usr/sbin/munin-node
 
+# set timezone
+ln -fs /usr/share/zoneinfo/$TIMEZONE /etc/localtime
+
 if [ "$INVENTORY_GEN" = "repo" ]
 then
 
