@@ -1,6 +1,7 @@
 FROM opensuse/leap:15.0
 
 ADD ansible /ansible/ 
+ADD init.sh /ansible/ 
 
 WORKDIR /ansible/
 
@@ -8,10 +9,8 @@ RUN zypper --non-interactive in --auto-agree-with-licenses python3 python3-PyYAM
     cpan install CGI::Fast &&\
     ansible-playbook local.yml -c local &&\
     zypper rm --clean-deps -y make gcc ansible &&\
-    rm -rf /ansible/roles /ansible/local.yml
-
-ADD init.sh /ansible/ 
-RUN chmod +x init.sh
+    rm -rf /ansible/roles /ansible/local.yml &&\
+    chmod +x init.sh
 
 ENV INVENTORY_GEN="repo" \ 
     HOSTS_REPO="https:\/\/your\/repo.git" \
