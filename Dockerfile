@@ -1,4 +1,4 @@
-FROM opensuse/leap:15.0
+FROM opensuse/leap:15.1
 
 ADD ansible /ansible/ 
 ADD init.sh /ansible/ 
